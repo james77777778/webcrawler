@@ -1,7 +1,7 @@
 import requests
 
 
-def lineNotifyMessage(token, msg):
+def line_notify(token, msg):
     headers = {
         "Authorization": "Bearer " + token,
         "Content-Type": "application/x-www-form-urlencoded"
@@ -19,4 +19,4 @@ def lineNotifyMessage(token, msg):
 if __name__ == "__main__":
     msg = 'test'
     token = ''
-    lineNotifyMessage(token, msg)
+    line_notify(token, msg)

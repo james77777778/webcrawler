@@ -1,6 +1,4 @@
-import re
 import requests
-import urllib
 from bs4 import BeautifulSoup
 
 
@@ -42,7 +40,7 @@ class AmazonCrawler(object):
         title = search_soup.find(id='productTitle').get_text().strip()
         try:
             price = self.get_price(search_soup.find(id='priceblock_ourprice').get_text().strip())
-        except:
+        except ValueError or IndexError:
             price = None
         try:
             stock = search_soup.select('#availability .a-color-state')[0].get_text().strip()
