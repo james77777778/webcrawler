@@ -1,4 +1,5 @@
 import json
+import pathlib
 
 from crawler import amazon
 from notify.line_notify import line_notify
@@ -15,7 +16,7 @@ def construct_msg(res):
 
 
 if __name__ == "__main__":
-    with open('token.json', 'r') as f:
+    with open(pathlib.Path(__file__).parent.absolute()/'token.json', 'r') as f:
         token = json.load(f)['Amazon Crawler']
     amazon_crawler = amazon.AmazonCrawler()
 
@@ -32,10 +33,8 @@ if __name__ == "__main__":
     ]
 
     print('start')
-    res = []
-    for url in urls:
-        res.append(amazon_crawler.search_by_specific_url(url))
-    for r, t in zip(res, target_prices):
-        if r[1] < t:
-            line_notify(token, construct_msg(r))
+    for url, target in zip(urls, target_prices):
+        res = amazon_crawler.search_by_specific_url(url)
+        if res[1] < target:
+            line_notify(token, construct_msg(res))
     print('finish.')
