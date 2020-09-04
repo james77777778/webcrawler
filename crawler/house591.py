@@ -97,7 +97,7 @@ class House591Crawler(object):
                     json_res = json.loads(json_req.text)
                     print('index', i+1)
                     print(json_res['data']['data'][0]['address_img_title'])
-                    time.sleep(0.1)
+                    time.sleep(0.5)
 
 
 if __name__ == "__main__":
